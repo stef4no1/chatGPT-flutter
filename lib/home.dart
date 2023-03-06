@@ -30,7 +30,16 @@ class _HomePageState extends State<HomePage> {
                             message: messages[index]["message"].toString(), 
                             isMe: messages[index]["isMe"].toString() == "false" ? false : true),
                     );
-                })))
+                }))),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                  child: Row(
+                    children: [
+                      Expanded(child: TextField()),
+                      IconButton(onPressed: () {}, icon: Icon(Icons.send))
+                    ],
+                  ),
+                )
         ]),
     );
   }
