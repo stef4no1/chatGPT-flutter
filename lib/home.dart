@@ -1,3 +1,4 @@
+import "package:chatgptcurso/widgets/message_bubble.dart";
 import "package:flutter/material.dart";
 
 class HomePage extends StatefulWidget {
@@ -9,7 +10,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
     final messages = [
-        {"message":"Hola, bienvenido","isMe": false}
+        {"message":"Hola, bienvenido","isMe": false},
+        {"message": "Hola", "isMe":true}
     ];
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,19 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             title: Text("ChatGPT"),
         ),
+        body: Column(children: [
+            Expanded(child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: messages.length,
+                itemBuilder: ((context,index){
+                    return Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: MessageBubble(
+                            message: messages[index]["message"].toString(), 
+                            isMe: messages[index]["isMe"].toString() == "false" ? false : true),
+                    );
+                })))
+        ]),
     );
   }
 }
