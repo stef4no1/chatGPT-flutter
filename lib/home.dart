@@ -1,3 +1,4 @@
+import "package:chatgptcurso/services/open_ai_services.dart";
 import "package:chatgptcurso/widgets/message_bubble.dart";
 import "package:flutter/material.dart";
 
@@ -13,6 +14,10 @@ class _HomePageState extends State<HomePage> {
         {"message":"Hola, bienvenido","isMe": false},
         {"message": "Hola", "isMe":true}
     ];
+
+  TextEditingController _textController = TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +40,18 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
                   child: Row(
                     children: [
-                      Expanded(child: TextField()),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.send))
+                      Expanded(child: TextField(controller: _textController,)),
+                      IconButton(
+                        onPressed: () async {
+                          final userMessage = _textController.text;
+                          messages.add({"message": _textController.text, "isMe": true});
+
+                          _textController.text = "";
+                          setState(() {});
+                          final res = await sendChatCompletionRequest(userMessage);
+                          messages.add({"message": res, "isMe": false});
+                      }, 
+                      icon: Icon(Icons.send))
                     ],
                   ),
                 )

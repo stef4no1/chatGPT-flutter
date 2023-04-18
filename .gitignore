@@ -31,6 +31,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+services/open_ai_services.dart 
 
 # Symbolication related
 app.*.symbols
