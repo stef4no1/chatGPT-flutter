@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/release
 
 # archivos
-open_ai_services.dart 
+lib/
